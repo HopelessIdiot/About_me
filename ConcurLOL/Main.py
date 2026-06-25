@@ -27,7 +27,7 @@ TOKEN = os.getenv("BOT_TOKEN")
 
 if not Token:
     if len(sys.argv) > 1:
-        TOKEN = sys.argv[1]
+        Token = sys.argv[1]
     else:
         print("❌ Ошибка: ТОКЕН НЕ НАЙДЕН! Задайте BOT_TOKEN в Amvera или передайте аргументом.")
         sys.exit(1)
