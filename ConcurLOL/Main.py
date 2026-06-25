@@ -21,7 +21,7 @@ from aiogram import F
 
 
 # ------------------- < Токен Сюда > -------------------
-Token = os.getenv("BOT_TOKEN")
+TOKEN = os.getenv("BOT_TOKEN")
 # ------------------- <  /\ /\ /\  > ------------------
 
 
@@ -32,7 +32,7 @@ if not Token:
         print("❌ Ошибка: ТОКЕН НЕ НАЙДЕН! Задайте BOT_TOKEN в Amvera или передайте аргументом.")
         sys.exit(1)
 
-config_path = "Config" # без .txt
+Config_path = "Config" # без .txt
 TxtName = "Texts" # без .txt
 TextData = {}
 
@@ -41,6 +41,8 @@ CrError = False
 LG.basicConfig(level=LG.INFO)
 bot = Bot(token=Token)
 dp = Dispatcher()
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 # \/-----------------------------------------<_______>---------------------------------------\/
@@ -145,9 +147,12 @@ MyPrivatManager = PrivatManager(False,"w",[])
 #Все для удобства изменения , фильтер тут менять
 def FileToDict():
     global TextData  
+    global TxtName
+
+    texts_path = os.path.join(BASE_DIR, TxtName + ".txt")
 
     try:
-        with open(TxtName + ".txt", 'r', encoding='utf-8') as f:
+        with open(texts_path, 'r', encoding='utf-8') as f:
             content = f.read()
             
             #--------------------------------------------------------------------------------------------
@@ -171,7 +176,10 @@ def FileToDict():
     
 def LoadConfig(manager):
     global CrError
-    config_path = "Config.txt"
+    global Base_DIR
+    global Config_path
+
+    config_path = os.path.join(BASE_DIR, f"{Config_path}.txt")
 
     if not os.path.exists(config_path):
         print(f"Крит удар по боту, Файл {config_path} не найден")
@@ -217,7 +225,7 @@ def LoadConfig(manager):
         CrError = True
 
 def SaveConfig(manager):
-    global config_path
+    global Config_path
 
     try:
         users_str = ",".join(manager.List) if manager.List else "None"
@@ -228,7 +236,7 @@ def SaveConfig(manager):
             f"<M>\n{roots_str}"
         )
 
-        with open(config_path + ".txt", "w", encoding="utf-8") as file:
+        with open(Config_path + ".txt", "w", encoding="utf-8") as file:
             file.write(new_content)
         return True
     
