@@ -21,7 +21,7 @@ from aiogram import F
 
 
 # ------------------- < Токен Сюда > -------------------
-TOKEN = os.getenv("BOT_TOKEN")
+Token = os.getenv("BOT_TOKEN")
 # ------------------- <  /\ /\ /\  > ------------------
 
 
